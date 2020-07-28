@@ -8,7 +8,7 @@ import { Ingredient } from '../shared/ingredient.model';
 
 export class ShoppingListService implements OnInit
 {   
-    onNewIngredient = new EventEmitter<Ingredient>();
+    ingredientsChanged = new EventEmitter<Ingredient[]>();
 
     ingredients: Ingredient[] =
     [
@@ -22,12 +22,23 @@ export class ShoppingListService implements OnInit
 
     getShoppingList(): Ingredient[]
     {
-        return this.ingredients;
+        return this.ingredients.slice();
     }
 
     addNewIngredient(newIngredient: Ingredient)
     {
         this.ingredients.push(newIngredient);
-        console.log(this.ingredients);
+        this.updateView();
+    }
+
+    addIngredients(ingredients: Ingredient[])
+    {
+        ingredients.forEach(ingredient => this.ingredients.push(ingredient));
+        this.updateView();
+    }
+
+    updateView()
+    {
+        this.ingredientsChanged.emit(this.ingredients.slice());
     }
 }

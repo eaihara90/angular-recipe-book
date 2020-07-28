@@ -28,8 +28,7 @@ export class ShoppingEditComponent implements OnInit
             
             this.shoppingListService.addNewIngredient(ingredient);
             
-            this.clearFields();
-        
+            this.resetFields();
         }
         else 
         {
@@ -37,7 +36,7 @@ export class ShoppingEditComponent implements OnInit
         }
     }
 
-    clearFields()
+    resetFields()
     {
         this.nameInputRef.nativeElement.value = '';
         this.amountInputRef.nativeElement.value = '';
