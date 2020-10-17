@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" [@init]>
     <div class="col-xs-12">
         <img [src]="recipeDetail.imagePath" alt="{{ recipeDetail.name }}" class="img-responsive" style="max-height: 300px;">
     </div>
@@ -19,13 +19,13 @@
             <ul class="dropdown-menu">
                 <li>
                     <a 
-                        href="#"
+                        style="cursor: pointer;"
                         (click)="onAddToShoppingList()">
                         Shopping List
                     </a>
                 </li>
-                <li><a href="#">Edit Recipe</a></li>
-                <li><a href="#">Delete Recipe</a></li>
+                <li><a style="cursor: pointer;" [routerLink]="['edit']">Edit Recipe</a></li>
+                <li><a style="cursor: pointer;">Delete Recipe</a></li>
             </ul>
         </div>
     </div>

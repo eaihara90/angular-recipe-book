@@ -50,6 +50,13 @@ export class RecipeService implements OnInit
         return this.recipes.slice();
     }
 
+    public getRecipe(index: number): Recipe
+    {
+        const recipe = this.recipes.slice()[index];
+
+        return recipe;
+    }
+
     addIngredientsToList(ingredients: Ingredient[])
     {
         this.shoppingListService.addIngredients(ingredients);
