@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { Recipe } from '../recipe.model';
@@ -15,14 +15,14 @@ import { RecipeService } from '../recipe.service';
 export class RecipeEditComponent implements OnInit, OnDestroy
 {
     private subscription = new Subscription();
+    private previousState: FormGroup;
     public id: number;
     public editMode: boolean;
     public recipeForm: FormGroup;
 
     constructor(private route: ActivatedRoute,
-                private recipeService: RecipeService) {
-
-    }
+                private router: Router,
+                private recipeService: RecipeService) { }
 
     ngOnInit(): void
     {
@@ -31,9 +31,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy
             this.id = +params['id'];
             this.editMode = params['id'] != null;
             this.initForm();
+            this.initPreviousState();
         }));
-
-        if (this.editMode) this.loadRecipe();
     }
 
     ngOnDestroy(): void
@@ -43,11 +42,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy
 
     public loadIngredients() {
         return (<FormArray>this.recipeForm.get('ingredients')).controls;
-    }
-
-    private loadRecipe(): void
-    {
-        console.log('Loading Recipe: ', this.id);
     }
 
     public onSubmit(): void
@@ -67,6 +61,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy
         {
             this.recipeService.addRecipe(newRecipe);
         }
+
+        this.router.navigate(['../'], { relativeTo: this.route });
     }
 
     public onAddIngredient()
@@ -75,7 +71,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy
         {
             'name': new FormControl(null, Validators.required),
             'amount': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
-        }))
+        }));
     }
 
     private initForm(): void
@@ -114,5 +110,21 @@ export class RecipeEditComponent implements OnInit, OnDestroy
             'description': new FormControl(recipeDescription, Validators.required),
             'ingredients': recipeIngredients
         });
+    }
+
+    private initPreviousState(): void
+    {
+        this.previousState = Object.assign({}, this.recipeForm);
+    }
+
+    public onCancel(): void
+    {
+        this.recipeForm = Object.assign({}, this.previousState);
+        this.router.navigate(['../'], { relativeTo: this.route });
+    }
+
+    public onDeleteIngredient(index: number): void
+    {
+        (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
     }
 }

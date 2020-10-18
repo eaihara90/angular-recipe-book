@@ -84,4 +84,15 @@ export class RecipeService implements OnInit
 
         this.recipeChanged.next(this.recipes.slice());
     }
+
+    public deleteRecipe(index: number): void
+    {
+        const newRecipesList = [...this.recipes];
+
+        newRecipesList.splice(index, 1);
+
+        this.recipes = [...newRecipesList];
+
+        this.recipeChanged.next(this.recipes.slice());
+    }
 }
