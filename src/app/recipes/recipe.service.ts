@@ -2,6 +2,7 @@ import { Injectable, OnInit, EventEmitter } from "@angular/core";
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs';
 
 @Injectable
 ({
@@ -10,7 +11,7 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 export class RecipeService implements OnInit
 {   
-    recipeSelected = new EventEmitter<Recipe>();
+    public recipeChanged = new Subject<Recipe[]>();
 
     private recipes: Recipe[] = 
     [
@@ -43,7 +44,7 @@ export class RecipeService implements OnInit
 
     constructor(private shoppingListService: ShoppingListService) {};
 
-    ngOnInit() {}
+    ngOnInit(): void { }
 
     getRecipes()
     {
@@ -57,8 +58,30 @@ export class RecipeService implements OnInit
         return recipe;
     }
 
-    addIngredientsToList(ingredients: Ingredient[])
+    public addIngredientsToList(ingredients: Ingredient[])
     {
         this.shoppingListService.addIngredients(ingredients);
+    }
+
+    public addRecipe(_recipe: Recipe): void
+    {
+        const newRecipesList = [...this.recipes];
+
+        newRecipesList.push(_recipe);
+
+        this.recipes = [...newRecipesList];
+
+        this.recipeChanged.next(this.recipes.slice());
+    }
+
+    public updateRecipe(index: number, _newRecipe: Recipe): void
+    {
+        const newRecipesList = [...this.recipes];
+
+        newRecipesList[index] = _newRecipe;
+
+        this.recipes = [...newRecipesList];
+
+        this.recipeChanged.next(this.recipes.slice());
     }
 }

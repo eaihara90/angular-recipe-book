@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { RecipeService } from './recipe.service';
 import { transition, style, animate, trigger } from '@angular/animations';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component
@@ -26,16 +28,10 @@ import { transition, style, animate, trigger } from '@angular/animations';
 export class RecipesComponent implements OnInit
 {
 
-    recipeItem: Recipe;
+    public recipeItem: Recipe;
 
-    constructor(private recipeService: RecipeService) { }
+    constructor() { }
 
-    ngOnInit(): void
-    {
-        this.recipeService.recipeSelected.subscribe
-        (
-            (recipe: Recipe) => this.recipeItem = recipe
-        );   
-    }
+    ngOnInit(): void { }
 
 }
