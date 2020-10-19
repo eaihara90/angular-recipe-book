@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
@@ -38,6 +39,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
+        HttpClientModule,
         ReactiveFormsModule
     ],
     bootstrap: [AppComponent]

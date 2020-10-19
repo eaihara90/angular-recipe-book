@@ -13,40 +13,13 @@ export class RecipeService implements OnInit
 {   
     public recipeChanged = new Subject<Recipe[]>();
 
-    private recipes: Recipe[] = 
-    [
-        new Recipe
-        (
-            'Fish \'n\' Chips', 
-            'Delicious and fast Fish n\' Chips recipe',
-            'https://cdn.tasteatlas.com/images/dishes/952be31521114ce89c8525996e17dbce.jpg?mw=1300',
-            [
-                new Ingredient('Potato', 2),
-                new Ingredient('Fish', 3),
-                new Ingredient('Lemon', 2),
-                new Ingredient('Bread', 1),
-                new Ingredient('Light beer', 1)
-            ]
-        ),
-        new Recipe
-        (
-            'Tasty Schnitzel',
-            'A super-tasy Schnitzel - just awesome!',
-            'https://www.alegrafoods.com.br/wp-content/uploads/2020/04/como-fazer-lombo-suino-a-milanesa.png',
-            [
-                new Ingredient('Potato', 2),
-                new Ingredient('Pork steak', 1),
-                new Ingredient('Flower', 2),
-                new Ingredient('Butter', 1)
-            ]
-        )
-    ];
+    private recipes: Recipe[] = [];
 
     constructor(private shoppingListService: ShoppingListService) {};
 
     ngOnInit(): void { }
 
-    getRecipes()
+    public getRecipes()
     {
         return this.recipes.slice();
     }
@@ -56,6 +29,11 @@ export class RecipeService implements OnInit
         const recipe = this.recipes.slice()[index];
 
         return recipe;
+    }
+
+    public setRecipes(recipes: Recipe[]): void {
+        this.recipes = recipes;
+        this.recipeChanged.next(this.recipes.slice());
     }
 
     public addIngredientsToList(ingredients: Ingredient[])
