@@ -5,12 +5,13 @@ import { User } from './user.model';
 import { AuthResponseData } from './auth-response-data.interface';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from '../../environments/environment'
 
 @Injectable({ providedIn: 'root'})
 export class AuthService {
-    private signupUrl: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
-    private loginUrl: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
-    private webApiKey: string = 'AIzaSyDC0HQJthz57f26nXlHBRugWuzpGkIZL7Q';
+    private signupUrl: string = environment.signupUrl;
+    private loginUrl: string = environment.loginUrl;
+    private webApiKey: string = environment.webApiKey;
 
     public user = new BehaviorSubject<User>(null);
 
