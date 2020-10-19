@@ -5,13 +5,13 @@ import { User } from './user.model';
 import { AuthResponseData } from './auth-response-data.interface';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { environment } from '../../environments/environment'
+import { apiKeys } from '../../environments/api.env'
 
 @Injectable({ providedIn: 'root'})
 export class AuthService {
-    private signupUrl: string = environment.signupUrl;
-    private loginUrl: string = environment.loginUrl;
-    private webApiKey: string = environment.webApiKey;
+    private signupUrl: string = apiKeys.signupUrl;
+    private loginUrl: string = apiKeys.loginUrl;
+    private webApiKey: string = apiKeys.webApiKey;
 
     public user = new BehaviorSubject<User>(null);
 
