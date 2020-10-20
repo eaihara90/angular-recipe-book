@@ -47,4 +47,4 @@ Thumbs.db
 
 
 # Enviroment variables
-src/environments/api.env.ts
+/src/environments/api.env.ts
