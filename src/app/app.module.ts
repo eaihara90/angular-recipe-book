@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthComponent } from './auth/auth.component';
 import { HeaderComponent } from './header/header.component';
@@ -19,6 +19,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 import { DropdownDirective } from './shared/dropdown.directive';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule
 ({
@@ -47,6 +48,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
         HttpClientModule,
         ReactiveFormsModule
     ],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

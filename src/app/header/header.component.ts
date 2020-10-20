@@ -24,9 +24,6 @@ export class HeaderComponent implements OnInit, OnDestroy
         this.subscription.add(this.authService.user.subscribe((user: User) =>
         {
             this.isAuthenticated = !!user;
-            console.log(user);
-            console.log(!user);
-            console.log(!!user);
         }));
     }
 
@@ -41,5 +38,9 @@ export class HeaderComponent implements OnInit, OnDestroy
 
     public onFetchData(): void {
         this.dataStorageService.fetchRecipes().subscribe();
+    }
+
+    public onLogout(): void {
+        this.authService.logout();
     }
 }

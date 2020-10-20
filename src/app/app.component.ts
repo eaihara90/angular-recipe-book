@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth/auth.service';
 
 @Component
 ({
@@ -7,14 +8,11 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent
-{
-    title = 'project';
+export class AppComponent implements OnInit {
 
-    currentPage: string;
+    constructor(private authService: AuthService) { }
 
-    changePage(page: string)
-    {
-        this.currentPage = page;
+    ngOnInit(): void {
+        this.authService.autologin();
     }
 }

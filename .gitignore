@@ -48,3 +48,4 @@ Thumbs.db
 
 # Enviroment variables
 src/api.env.ts
+src/app/shared/api.service.ts
