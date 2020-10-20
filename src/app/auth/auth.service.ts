@@ -5,7 +5,7 @@ import { User } from './user.model';
 import { AuthResponseData } from './auth-response-data.interface';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { apiKeys } from '../../environments/api.env'
+import { apiKeys } from '../../api.env'
 
 @Injectable({ providedIn: 'root'})
 export class AuthService {
