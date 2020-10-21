@@ -64,4 +64,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.isLoginMode = !this.isLoginMode;
     }
     
+    public handleOnClose(): void {
+        this.error = null;
+    }
 }

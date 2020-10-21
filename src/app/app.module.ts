@@ -17,6 +17,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 import { DropdownDirective } from './shared/dropdown.directive';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
@@ -25,6 +26,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 ({
     declarations:
     [
+        AlertComponent,
         AppComponent,
         AuthComponent,
         HeaderComponent,
